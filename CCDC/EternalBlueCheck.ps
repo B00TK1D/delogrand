@@ -1,0 +1,60 @@
+# Copy and paste this to a Powershell Window to check if MS17-010 has already been installed on this system
+
+function checkForHotFix
+{
+ Write-Host "[*] MS17-010 Checker"
+ Write-Host "[*] ++++++++++++++++++++++++++++++++++++++++++"
+ Write-Host "[*] Starting check"
+
+ # based on https://www.poweradmin.com/blog/how-to-check-for-ms17-010-and-other-hotfixes/
+ # and on http://tomtalks.uk/2013/09/list-all-microsoftwindows-updates-with-powershell-sorted-by-kbhotfixid-get-microsoftupdate/
+
+ # To find all Hotfixes of a security update copy the page content and
+ # use http://regexr.com/ with the regex KB[0-9]{7} to extract them
+
+ $hotfixes = "KB4013429","KB4012606","KB4013198","KB4012598","KB4012598","KB4012598","KB4012598","KB4012598","KB4012212","KB4012215","KB4012212","KB4012215","KB4012213","KB4012216","KB4012214","KB4012217","KB4012213","KB4012216","KB4012606","KB4013198","KB4013429","KB4013429","KB4016871", "KB4019472"
+
+ Write-Host "[*] Querying installed HotFixes using method 1"
+ $wu = new-object -com “Microsoft.Update.Searcher”
+ 
+ $totalupdates = $wu.GetTotalHistoryCount()
+ $all = $wu.QueryHistory(0,$totalupdates)
+ 
+ # Define a new array to gather output
+ $UpdateCollection= @()
+ 
+ Foreach ($update in $all)
+ {
+ $string = $update.title
+ 
+ $Regex = “KB\d*”
+ $KB = $string | Select-String -Pattern $regex | Select-Object { $_.Matches }
+ 
+ $output = New-Object -TypeName PSobject
+ $output | add-member NoteProperty “HotFixID” -value $KB.‘ $_.Matches ‘.Value
+ $output | add-member NoteProperty “Title” -value $string
+ $UpdateCollection += $output
+ 
+ }
+
+ Write-Host "[*] Querying installed HotFixes using method 2" 
+ Foreach ($hotfix in Get-Hotfix)
+ {
+ $output = New-Object -TypeName PSobject
+ $output | add-member NoteProperty “HotFixID” -value $hotfix.HotFixID
+ $output | add-member NoteProperty “Title” -value $hotfix.Description
+ $UpdateCollection += $output 
+ }
+ 
+ Write-Host "[*] Check if any suitable HotFix was found"
+ if ($UpdateCollection | Where-Object {$hotfixes -contains $_.HotfixID}) {
+ $hotfixID = $UpdateCollection | Where-Object {$hotfixes -contains $_.HotfixID} | Select-Object -first 1 "HotFixID"
+ Write-Host "[+] Hotfix"$hotfixID.HotFixID"installed - System is secure!" -foreground "green"
+ } else {
+ Write-Host "[-] No Hotfix found - System vulnerable!" -foreground "red"
+ }
+}
+cls
+checkForHotFix
+
+# Also copy this comment - This makes it "autorun"
