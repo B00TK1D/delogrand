@@ -1,0 +1,1 @@
+invoke-command -ComputerName @((Get-ADComputer -Filter 'Name -like "GBST*"').Name) -ScriptBlock {gwmi win32_service | Select-object Name, PathName | where-object {$_.PathName -notlike 'C:\Windows\system32\*' -and $_.PathName -like 'C:\Program Files\*'}}
