@@ -1,2 +1,2 @@
 #!/bin/bash
-ls $@ | sed 's/ls//g' | column
+ls $@ | sed 's/ls//g' | sed 's/cd//g' | sed 's/sudo//g' | column
