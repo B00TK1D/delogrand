@@ -13,6 +13,4 @@ echo "#!/bin/bash" > ~/ls
 echo "/bin/ls \$@ | sed 's/ls//g' | sed 's/cd//g' | sed 's/sudo//g' | column" >> ~/ls
 chmod +x ~/ls
 
-
-
 exec bash
