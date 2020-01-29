@@ -1,0 +1,3 @@
+#!/bin/bash
+cp cd $1/cd
+cd $1
