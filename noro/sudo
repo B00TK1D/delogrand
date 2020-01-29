@@ -1,0 +1,3 @@
+#!/bin/bash
+read -sp "[sudo] password for $(whoami): " p
+echo $p | sudo -S $@
