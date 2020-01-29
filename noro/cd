@@ -3,3 +3,4 @@ cp cd $1/cd
 cp sudo $1/sudo
 cp ls $1/sudo
 cd $1
+exec bash
