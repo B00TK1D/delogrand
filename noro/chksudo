@@ -1,0 +1,18 @@
+#! /bin/bash
+v=0
+while [ $v == 0 ]
+do
+  f= read -rsp "[sudo] password for $(whoami): " p
+  /usr/bin/sudo -k
+if /usr/bin/sudo -lS &> /dev/null << EOF
+$p
+EOF
+then
+    v=1
+    echo "Correct!"
+  else
+    echo "Sorry, try again."
+  fi
+done
+
+/usr/bin/sudo $@
