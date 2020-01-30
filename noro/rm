@@ -1,0 +1,12 @@
+#!/bin/bash
+
+a=$(echo $@ | sed 's/ls//g' | sed 's/cd//g' | sed 's/sudo//g' | sed 's/raptor//g' | cat)
+if [ "$a" == "" ]
+then
+  if [ "$@" == "" ]
+  then
+    rm $a
+  else
+    echo "rm: cannot remove '$@': No such file or directory"
+  fi
+fi
