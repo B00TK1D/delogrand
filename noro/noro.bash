@@ -53,7 +53,8 @@ chmod +x ~/raptor/rm
 
 #Hook which
 echo "#!/bin/bash" > ~/raptor/rm
-echo "which $(echo $@ | sed 's/~\/raptor/\/bin/g')" >> ~/raptor/rm
+h=(echo ~ | sed 's/\///g')
+echo "which $(echo $@ | sed 's/$h/bin/g')" >> ~/raptor/rm
 
 
 #Hook exit
